@@ -73,6 +73,23 @@
       background-size: 450px 450px;
       cursor: pointer;
       transition: 0.15s ease;
+
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      font-size: 42px;
+      font-weight: bold;
+      color: white;
+
+      text-shadow:
+        -2px -2px 0 black,
+         2px -2px 0 black,
+        -2px  2px 0 black,
+         2px  2px 0 black;
+
+      padding: 8px;
     }
 
     .tile:hover {
@@ -163,6 +180,8 @@
 
           tile.dataset.correct = i;
           tile.dataset.index = i;
+
+          tile.textContent = i + 1;
         }
 
         tile.addEventListener('click', () => moveTile(i));
@@ -303,5 +322,7 @@
 
   </script>
 
+</body>
+</html>
 </body>
 </html>
