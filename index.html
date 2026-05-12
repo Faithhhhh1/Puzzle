@@ -324,49 +324,45 @@
 
     function checkWin() {
 
-      const solved = tiles.every((tile, index) => {
+  const solved = tiles.every((tile, index) => {
 
-        if (tile.classList.contains('empty')) {
-          return index === size * size - 1;
-        }
-
-        return Number(tile.dataset.correct) === index;
-      });
-
-      if (solved) {
-
-        // remove numbers
-        tiles.forEach(tile => {
-          tile.textContent = '';
-        });
-
-        // remove grid lines
-        puzzle.style.gap = '0px';
-        puzzle.style.background = 'transparent';
-
-        // show final image
-        const emptyTile = tiles.find(tile =>
-          tile.classList.contains('empty')
-        );
-
-        emptyTile.classList.remove('empty');
-
-        emptyTile.style.backgroundImage =
-          "url('mom-puzzle.jpg')";
-
-        emptyTile.style.backgroundSize =
-          '450px 450px';
-
-        emptyTile.style.backgroundPosition =
-          '-300px -300px';
-
-        message.textContent =
-          `You solved it in ${moves} moves! 💕`;
-
-        launchConfetti();
-      }
+    if (tile.classList.contains('empty')) {
+      return index === size * size - 1;
     }
 
+    return Number(tile.dataset.correct) === index;
+  });
+
+  if (solved) {
+
+    // remove numbers
+    tiles.forEach(tile => {
+      tile.textContent = '';
+    });
+
+    // remove puzzle grid spacing
+    puzzle.style.gap = '0px';
+    puzzle.style.background = 'transparent';
+
+    // remove tile borders visually
+    tiles.forEach(tile => {
+      tile.style.boxShadow = 'none';
+      tile.style.border = 'none';
+    });
+
+    // KEEP empty tile empty
+    const emptyTile = tiles.find(tile =>
+      tile.classList.contains('empty')
+    );
+
+    emptyTile.style.background = '#f5f5f5';
+
+    message.textContent =
+      `You solved it in ${moves} moves! 💕`;
+
+    launchConfetti();
+  }
+}
     createPuzzle();
     shufflePuzzle();
 
