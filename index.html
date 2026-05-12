@@ -15,110 +15,93 @@
 body{
   margin:0;
   min-height:100vh;
+
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  overflow-x:hidden;
 
   font-family:Arial,sans-serif;
+  color:white;
+
+  overflow-x:hidden;
 
   background:
     radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 1px, transparent 2px),
     radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 1px, transparent 2px),
-    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.15) 1px, transparent 2px),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.12) 1px, transparent 2px),
-    linear-gradient(to bottom, #040814, #0b1230);
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.12) 1px, transparent 2px),
+    linear-gradient(to bottom,#020611,#07152f);
 
   background-size:
     220px 220px,
     260px 260px,
     300px 300px,
-    180px 180px,
     cover;
 
-  color:white;
-
-  padding:30px;
-}
-
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-
-  background:
-    radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-
-  background-size:120px 120px;
-
-  animation:twinkle 6s linear infinite;
-
-  pointer-events:none;
-}
-
-@keyframes twinkle{
-  0%{opacity:0.5;}
-  50%{opacity:1;}
-  100%{opacity:0.5;}
+  padding:20px;
 }
 
 h1{
-  margin-bottom:12px;
-  font-size:52px;
+  margin-top:20px;
+  margin-bottom:10px;
+
   text-align:center;
 
+  font-size:56px;
+
   text-shadow:
-    0 0 10px rgba(255,255,255,0.3),
-    0 0 20px rgba(255,255,255,0.15);
+    0 0 15px rgba(255,255,255,0.25);
 }
 
 .subtitle{
-  margin-bottom:18px;
-  color:#d6dcff;
+  color:#d8e0ff;
+
+  margin-bottom:25px;
+
+  font-size:22px;
+
   text-align:center;
 }
 
 .controls{
   display:flex;
-  gap:14px;
+  gap:16px;
+
   margin-bottom:24px;
 }
 
 button{
-  padding:14px 24px;
-
   border:none;
+
+  padding:15px 28px;
+
   border-radius:14px;
 
-  background:#161d42;
+  background:#1a2c68;
 
   color:white;
 
-  font-size:16px;
+  font-size:20px;
   font-weight:bold;
 
   cursor:pointer;
 
-  transition:0.2s ease;
+  transition:0.2s;
 
   box-shadow:
-    0 0 15px rgba(140,160,255,0.15);
+    0 0 20px rgba(120,150,255,0.25);
 }
 
 button:hover{
-  transform:translateY(-2px) scale(1.04);
+  transform:scale(1.04);
 
-  background:#26336d;
-
-  box-shadow:
-    0 0 18px rgba(140,160,255,0.35);
+  background:#2946a3;
 }
 
 #puzzle{
 
-  width:500px;
-  height:710px;
+  width:min(92vw,420px);
+
+  aspect-ratio: 3 / 4;
 
   display:grid;
 
@@ -127,24 +110,25 @@ button:hover{
 
   gap:2px;
 
-  background:#11182f;
+  padding:6px;
 
-  padding:8px;
+  background:#111b3d;
 
-  border-radius:20px;
+  border-radius:18px;
 
   overflow:hidden;
 
   box-shadow:
-    0 0 35px rgba(110,140,255,0.18),
-    0 20px 45px rgba(0,0,0,0.45);
+    0 0 35px rgba(110,140,255,0.18);
 }
 
 .tile{
 
-  background-image:url('mom-puzzle.jpg');
+  background-image:url("./mom-puzzle.jpg");
 
-  background-size:500px 710px;
+  background-size:300% 300%;
+
+  background-repeat:no-repeat;
 
   display:flex;
 
@@ -153,7 +137,7 @@ button:hover{
 
   padding:8px;
 
-  font-size:42px;
+  font-size:38px;
   font-weight:bold;
 
   color:white;
@@ -168,7 +152,7 @@ button:hover{
 
   user-select:none;
 
-  transition:0.15s ease;
+  transition:0.15s;
 }
 
 .tile:hover{
@@ -181,40 +165,38 @@ button:hover{
 }
 
 #moveCounter{
-  margin-top:18px;
-  font-size:24px;
-  font-weight:bold;
-
-  text-shadow:
-    0 0 12px rgba(255,255,255,0.2);
-}
-
-.message{
-  margin-top:24px;
+  margin-top:22px;
 
   font-size:34px;
   font-weight:bold;
+}
+
+.message{
+  margin-top:18px;
 
   text-align:center;
 
-  text-shadow:
-    0 0 18px rgba(255,255,255,0.25);
+  font-size:36px;
+  font-weight:bold;
 }
 
-@media(max-width:560px){
+@media(max-width:600px){
 
   h1{
-    font-size:38px;
+    font-size:44px;
   }
 
-  #puzzle{
-    width:92vw;
-    height:130vw;
+  .subtitle{
+    font-size:18px;
+  }
+
+  button{
+    font-size:18px;
+    padding:14px 24px;
   }
 
   .tile{
-    background-size:92vw 130vw;
-    font-size:34px;
+    font-size:30px;
   }
 
 }
@@ -244,9 +226,9 @@ button:hover{
 
 <script>
 
-const puzzle=document.getElementById('puzzle');
-const message=document.getElementById('message');
-const moveCounter=document.getElementById('moveCounter');
+const puzzle=document.getElementById("puzzle");
+const moveCounter=document.getElementById("moveCounter");
+const message=document.getElementById("message");
 
 const size=3;
 
@@ -258,77 +240,55 @@ function updateMoves(){
   moveCounter.textContent=`Moves: ${moves}`;
 }
 
-function renderPuzzle(){
+function createPuzzle(){
 
-  puzzle.innerHTML='';
+  puzzle.innerHTML="";
 
   board.forEach((value,index)=>{
 
-    const tile=document.createElement('div');
+    const tile=document.createElement("div");
 
     if(value===0){
 
-      tile.className='tile empty';
+      tile.className="tile empty";
 
     }else{
 
-      tile.className='tile';
+      tile.className="tile";
 
       const correctIndex=value-1;
 
-      const row=Math.floor(correctIndex/size);
-      const col=correctIndex%size;
+      const row=Math.floor(correctIndex/3);
+      const col=correctIndex%3;
 
       tile.style.backgroundPosition=
-        `-${col*166.66}px -${row*236.66}px`;
+        `${col * 50}% ${row * 50}%`;
 
       tile.textContent=value;
     }
 
-    tile.addEventListener('click',()=>moveTile(index));
+    tile.addEventListener("click",()=>moveTile(index));
 
     puzzle.appendChild(tile);
-
   });
 
-}
-
-function createPuzzle(){
-
-  board=[1,2,3,4,5,6,7,8,0];
-
-  moves=0;
-
-  updateMoves();
-
-  message.textContent='';
-
-  renderPuzzle();
 }
 
 function moveTile(index){
 
   const emptyIndex=board.indexOf(0);
 
-  const valid=[
-    emptyIndex-1,
-    emptyIndex+1,
-    emptyIndex-size,
-    emptyIndex+size
-  ];
+  const row=Math.floor(index/3);
+  const col=index%3;
 
-  const sameRow=
-    Math.floor(index/size)===
-    Math.floor(emptyIndex/size);
+  const emptyRow=Math.floor(emptyIndex/3);
+  const emptyCol=emptyIndex%3;
 
-  if(
-    valid.includes(index)&&
-    (
-      sameRow||
-      index===emptyIndex-size||
-      index===emptyIndex+size
-    )
-  ){
+  const valid=
+    (Math.abs(row-emptyRow)===1 && col===emptyCol) ||
+    (Math.abs(col-emptyCol)===1 && row===emptyRow);
+
+  if(valid){
 
     [board[index],board[emptyIndex]]=
     [board[emptyIndex],board[index]];
@@ -337,7 +297,7 @@ function moveTile(index){
 
     updateMoves();
 
-    renderPuzzle();
+    createPuzzle();
 
     checkWin();
   }
@@ -346,53 +306,39 @@ function moveTile(index){
 
 function shufflePuzzle(){
 
-  for(let i=0;i<400;i++){
+  for(let i=0;i<300;i++){
 
     const emptyIndex=board.indexOf(0);
 
+    const row=Math.floor(emptyIndex/3);
+    const col=emptyIndex%3;
+
     const possible=[];
 
-    const left=emptyIndex-1;
-    const right=emptyIndex+1;
-    const up=emptyIndex-size;
-    const down=emptyIndex+size;
+    if(row>0) possible.push(emptyIndex-3);
+    if(row<2) possible.push(emptyIndex+3);
+    if(col>0) possible.push(emptyIndex-1);
+    if(col<2) possible.push(emptyIndex+1);
 
-    if(
-      left>=0 &&
-      Math.floor(left/size)===
-      Math.floor(emptyIndex/size)
-    ){
-      possible.push(left);
-    }
-
-    if(
-      right<size*size &&
-      Math.floor(right/size)===
-      Math.floor(emptyIndex/size)
-    ){
-      possible.push(right);
-    }
-
-    if(up>=0) possible.push(up);
-    if(down<size*size) possible.push(down);
-
-    const randomMove=
+    const random=
       possible[Math.floor(Math.random()*possible.length)];
 
-    [board[randomMove],board[emptyIndex]]=
-    [board[emptyIndex],board[randomMove]];
+    [board[random],board[emptyIndex]]=
+    [board[emptyIndex],board[random]];
   }
 
   moves=0;
 
   updateMoves();
 
-  renderPuzzle();
+  message.textContent="";
+
+  createPuzzle();
 }
 
 function resetPuzzle(){
 
-  createPuzzle();
+  board=[1,2,3,4,5,6,7,8,0];
 
   shufflePuzzle();
 }
@@ -401,7 +347,7 @@ function launchConfetti(){
 
   confetti({
     particleCount:220,
-    spread:140,
+    spread:130,
     origin:{y:0.6}
   });
 
@@ -416,6 +362,7 @@ function checkWin(){
   if(solved){
 
     puzzle.innerHTML=`
+
       <div style="
         position:relative;
         width:100%;
@@ -423,7 +370,7 @@ function checkWin(){
       ">
 
         <img
-          src="mom-puzzle.jpg"
+          src="./mom-puzzle.jpg"
           style="
             width:100%;
             height:100%;
@@ -434,14 +381,15 @@ function checkWin(){
 
         <div style="
           position:absolute;
-          width:33.333%;
-          height:33.333%;
           right:0;
           bottom:0;
+          width:33.333%;
+          height:33.333%;
           background:#d9d9d9;
         "></div>
 
       </div>
+
     `;
 
     message.textContent=
@@ -452,7 +400,8 @@ function checkWin(){
 
 }
 
-createPuzzle();
+board=[1,2,3,4,5,6,7,8,0];
+
 shufflePuzzle();
 
 </script>
