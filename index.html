@@ -26,6 +26,8 @@ body{
 
 h1{
   margin-bottom:10px;
+  font-size:56px;
+  text-align:center;
 }
 
 .controls{
@@ -42,6 +44,11 @@ button{
   color:white;
   font-size:16px;
   cursor:pointer;
+  transition:0.2s ease;
+}
+
+button:hover{
+  transform:scale(1.05);
 }
 
 #puzzle{
@@ -59,6 +66,8 @@ button{
   border:8px solid white;
 
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
+
+  overflow:hidden;
 }
 
 .tile{
@@ -85,6 +94,12 @@ button{
   cursor:pointer;
 
   user-select:none;
+
+  transition:0.15s ease;
+}
+
+.tile:hover{
+  opacity:0.92;
 }
 
 .empty{
@@ -102,9 +117,14 @@ button{
   margin-top:20px;
   font-size:26px;
   font-weight:bold;
+  text-align:center;
 }
 
 @media(max-width:520px){
+
+  h1{
+    font-size:38px;
+  }
 
   #puzzle{
     width:92vw;
@@ -113,6 +133,7 @@ button{
 
   .tile{
     background-size:92vw 92vw;
+    font-size:34px;
   }
 
 }
@@ -148,6 +169,7 @@ let board=[];
 let moves=0;
 
 function updateMoves(){
+
   moveCounter.textContent=`Moves: ${moves}`;
 }
 
@@ -323,12 +345,13 @@ function checkWin(){
           style="
             width:100%;
             height:100%;
-            object-fit:contain;
+            object-fit:cover;
             display:block;
-            background:white;
+            background:transparent;
           "
         />
 
+        <!-- empty tile overlay -->
         <div style="
           position:absolute;
           width:33.333%;
