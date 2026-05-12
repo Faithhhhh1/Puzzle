@@ -1,384 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mother's Day Puzzle</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<title>Mother's Day Puzzle</title>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #f5f5f5;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
+<style>
 
-    h1 {
-      margin-bottom: 10px;
-      text-align: center;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    p {
-      margin-top: 0;
-      color: #555;
-      text-align: center;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#f5f5f5;
+  font-family:Arial,sans-serif;
+  padding:20px;
+}
 
-    .controls {
-      margin: 20px 0;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+h1{
+  margin-bottom:10px;
+}
 
-    button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 10px;
-      background: black;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.2s ease;
-    }
+.controls{
+  margin:20px 0;
+  display:flex;
+  gap:12px;
+}
 
-    button:hover {
-      transform: scale(1.03);
-    }
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:black;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    #puzzle {
-      width: 450px;
-      height: 450px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 2px;
-      background: #222;
-      border: 8px solid white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: 0.4s ease;
-    }
+#puzzle{
+  width:450px;
+  height:450px;
 
-    .tile {
-      background-image: url('mom-puzzle.jpg');
-      background-size: 450px 450px;
-      cursor: pointer;
-      transition: 0.3s ease;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(3,1fr);
 
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
+  gap:2px;
 
-      font-size: 42px;
-      font-weight: bold;
-      color: white;
+  background:#222;
 
-      text-shadow:
-        -2px -2px 0 black,
-         2px -2px 0 black,
-        -2px  2px 0 black,
-         2px  2px 0 black;
+  border:8px solid white;
 
-      padding: 8px;
-    }
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
 
-    .tile:hover {
-      opacity: 0.92;
-    }
+.tile{
+  background-image:url('mom-puzzle.jpg');
+  background-size:450px 450px;
 
-    .empty {
-      background: #ddd;
-      cursor: default;
-    }
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
 
-    .message {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #222;
-      text-align: center;
-    }
+  padding:8px;
 
-    #moveCounter {
-      margin-top: 10px;
-      font-size: 18px;
-      font-weight: bold;
-    }
+  font-size:42px;
+  font-weight:bold;
 
-    @media (max-width: 520px) {
-      #puzzle {
-        width: 92vw;
-        height: 92vw;
-      }
+  color:white;
 
-      .tile {
-        background-size: 92vw 92vw;
-      }
-    }
-  </style>
+  text-shadow:
+    -2px -2px 0 black,
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black;
+
+  cursor:pointer;
+
+  user-select:none;
+}
+
+.empty{
+  background:#e8e8e8;
+  cursor:default;
+}
+
+#moveCounter{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.message{
+  margin-top:20px;
+  font-size:26px;
+  font-weight:bold;
+}
+
+@media(max-width:520px){
+
+  #puzzle{
+    width:92vw;
+    height:92vw;
+  }
+
+  .tile{
+    background-size:92vw 92vw;
+  }
+
+}
+
+</style>
 </head>
 <body>
 
-  <h1>Mother's Day Puzzle 💖</h1>
-  <p>Slide the pieces into the correct order.</p>
+<h1>Mother's Day Puzzle 💖</h1>
 
-  <div class="controls">
-    <button onclick="shufflePuzzle()">Shuffle</button>
-    <button onclick="resetPuzzle()">Reset</button>
-  </div>
+<div class="controls">
+  <button onclick="shufflePuzzle()">Shuffle</button>
+  <button onclick="resetPuzzle()">Reset</button>
+</div>
 
-  <div id="puzzle"></div>
+<div id="puzzle"></div>
 
-  <div id="moveCounter">Moves: 0</div>
+<div id="moveCounter">Moves: 0</div>
 
-  <div class="message" id="message"></div>
+<div class="message" id="message"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <script>
-    const puzzle = document.getElementById('puzzle');
-    const message = document.getElementById('message');
-    const moveCounter = document.getElementById('moveCounter');
+<script>
 
-    const size = 3;
-    let tiles = [];
-    let moves = 0;
+const puzzle=document.getElementById('puzzle');
+const message=document.getElementById('message');
+const moveCounter=document.getElementById('moveCounter');
 
-    function updateMoves() {
-      moveCounter.textContent = `Moves: ${moves}`;
+const size=3;
+
+let board=[];
+let moves=0;
+
+function updateMoves(){
+  moveCounter.textContent=`Moves: ${moves}`;
+}
+
+function renderPuzzle(){
+
+  puzzle.innerHTML='';
+
+  board.forEach((value,index)=>{
+
+    const tile=document.createElement('div');
+
+    if(value===0){
+
+      tile.className='tile empty';
+
+    }else{
+
+      tile.className='tile';
+
+      const correctIndex=value-1;
+
+      const row=Math.floor(correctIndex/size);
+      const col=correctIndex%size;
+
+      tile.style.backgroundPosition=
+        `-${col*150}px -${row*150}px`;
+
+      tile.textContent=value;
     }
 
-    function createPuzzle() {
-      puzzle.innerHTML = '';
+    tile.addEventListener('click',()=>moveTile(index));
 
-      // restore puzzle appearance
-      puzzle.style.gap = '2px';
-      puzzle.style.background = '#222';
+    puzzle.appendChild(tile);
 
-      tiles = [];
-      moves = 0;
-
-      updateMoves();
-
-      for (let i = 0; i < size * size; i++) {
-
-        const tile = document.createElement('div');
-
-        tile.classList.add('tile');
-
-        if (i === size * size - 1) {
-
-          tile.classList.add('empty');
-          tile.dataset.index = i;
-
-        } else {
-
-          const row = Math.floor(i / size);
-          const col = i % size;
-
-          tile.style.backgroundPosition =
-            `-${col * 150}px -${row * 150}px`;
-
-          tile.dataset.correct = i;
-          tile.dataset.index = i;
-
-          // tile numbers
-          tile.textContent = i + 1;
-        }
-
-        tile.addEventListener('click', () => moveTile(i));
-
-        tiles.push(tile);
-        puzzle.appendChild(tile);
-      }
-    }
-
-    function moveTile(index) {
-
-      const emptyIndex = tiles.findIndex(t =>
-        t.classList.contains('empty')
-      );
-
-      const validMoves = [
-        emptyIndex - 1,
-        emptyIndex + 1,
-        emptyIndex - size,
-        emptyIndex + size
-      ];
-
-      const isAdjacent = validMoves.includes(index);
-
-      const sameRow =
-        Math.floor(index / size) ===
-        Math.floor(emptyIndex / size);
-
-      if (
-        isAdjacent &&
-        (
-          sameRow ||
-          index === emptyIndex - size ||
-          index === emptyIndex + size
-        )
-      ) {
-
-        swapTiles(index, emptyIndex);
-
-        moves++;
-        updateMoves();
-
-        checkWin();
-      }
-    }
-
-    function swapTiles(i1, i2) {
-
-      const tile1 = tiles[i1];
-      const tile2 = tiles[i2];
-
-      const clone1 = tile1.cloneNode(true);
-      const clone2 = tile2.cloneNode(true);
-
-      clone1.addEventListener('click', () => moveTile(i2));
-      clone2.addEventListener('click', () => moveTile(i1));
-
-      puzzle.replaceChild(clone2, tile1);
-      puzzle.replaceChild(clone1, tile2);
-
-      [tiles[i1], tiles[i2]] = [clone2, clone1];
-    }
-
-    function shufflePuzzle() {
-
-      for (let i = 0; i < 200; i++) {
-
-        const emptyIndex = tiles.findIndex(t =>
-          t.classList.contains('empty')
-        );
-
-        const possible = [];
-
-        const left = emptyIndex - 1;
-        const right = emptyIndex + 1;
-        const up = emptyIndex - size;
-        const down = emptyIndex + size;
-
-        if (
-          left >= 0 &&
-          Math.floor(left / size) ===
-          Math.floor(emptyIndex / size)
-        ) {
-          possible.push(left);
-        }
-
-        if (
-          right < size * size &&
-          Math.floor(right / size) ===
-          Math.floor(emptyIndex / size)
-        ) {
-          possible.push(right);
-        }
-
-        if (up >= 0) possible.push(up);
-        if (down < size * size) possible.push(down);
-
-        const move =
-          possible[Math.floor(Math.random() * possible.length)];
-
-        swapTiles(move, emptyIndex);
-      }
-
-      moves = 0;
-
-      updateMoves();
-
-      message.textContent = '';
-    }
-
-    function resetPuzzle() {
-
-      createPuzzle();
-      shufflePuzzle();
-
-      message.textContent = '';
-    }
-
-    function launchConfetti() {
-
-      confetti({
-        particleCount: 180,
-        spread: 120,
-        origin: { y: 0.6 }
-      });
-    }
-
-    function checkWin() {
-
-  const solved = tiles.every((tile, index) => {
-
-    if (tile.classList.contains('empty')) {
-      return index === size * size - 1;
-    }
-
-    return Number(tile.dataset.correct) === index;
   });
 
-  if (solved) {
+}
 
-    puzzle.innerHTML = `
+function createPuzzle(){
+
+  board=[1,2,3,4,5,6,7,8,0];
+
+  moves=0;
+
+  updateMoves();
+
+  message.textContent='';
+
+  puzzle.style.gap='2px';
+  puzzle.style.background='#222';
+
+  renderPuzzle();
+}
+
+function moveTile(index){
+
+  const emptyIndex=board.indexOf(0);
+
+  const valid=[
+    emptyIndex-1,
+    emptyIndex+1,
+    emptyIndex-size,
+    emptyIndex+size
+  ];
+
+  const sameRow=
+    Math.floor(index/size)===
+    Math.floor(emptyIndex/size);
+
+  if(
+    valid.includes(index)&&
+    (
+      sameRow||
+      index===emptyIndex-size||
+      index===emptyIndex+size
+    )
+  ){
+
+    [board[index],board[emptyIndex]]=
+    [board[emptyIndex],board[index]];
+
+    moves++;
+
+    updateMoves();
+
+    renderPuzzle();
+
+    checkWin();
+  }
+
+}
+
+function shufflePuzzle(){
+
+  for(let i=0;i<300;i++){
+
+    const emptyIndex=board.indexOf(0);
+
+    const possible=[];
+
+    const left=emptyIndex-1;
+    const right=emptyIndex+1;
+    const up=emptyIndex-size;
+    const down=emptyIndex+size;
+
+    if(
+      left>=0 &&
+      Math.floor(left/size)===
+      Math.floor(emptyIndex/size)
+    ){
+      possible.push(left);
+    }
+
+    if(
+      right<size*size &&
+      Math.floor(right/size)===
+      Math.floor(emptyIndex/size)
+    ){
+      possible.push(right);
+    }
+
+    if(up>=0) possible.push(up);
+    if(down<size*size) possible.push(down);
+
+    const randomMove=
+      possible[Math.floor(Math.random()*possible.length)];
+
+    [board[randomMove],board[emptyIndex]]=
+    [board[emptyIndex],board[randomMove]];
+  }
+
+  moves=0;
+
+  updateMoves();
+
+  renderPuzzle();
+}
+
+function resetPuzzle(){
+
+  createPuzzle();
+
+  shufflePuzzle();
+}
+
+function launchConfetti(){
+
+  confetti({
+    particleCount:180,
+    spread:120,
+    origin:{y:0.6}
+  });
+
+}
+
+function checkWin(){
+
+  const solved=
+    JSON.stringify(board)===
+    JSON.stringify([1,2,3,4,5,6,7,8,0]);
+
+  if(solved){
+
+    puzzle.innerHTML=`
       <div style="
-        position: relative;
-        width: 100%;
-        height: 100%;
+        position:relative;
+        width:100%;
+        height:100%;
       ">
 
         <img
           src="mom-puzzle.jpg"
           style="
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width:100%;
+            height:100%;
+            object-fit:contain;
+            display:block;
+            background:white;
           "
         />
 
-        <!-- empty tile overlay -->
         <div style="
-          position: absolute;
-          width: 33.333%;
-          height: 33.333%;
-          right: 0;
-          bottom: 0;
-          background: #f5f5f5;
+          position:absolute;
+          width:33.333%;
+          height:33.333%;
+          right:0;
+          bottom:0;
+          background:#f5f5f5;
         "></div>
 
       </div>
     `;
 
-    puzzle.style.display = 'block';
-    puzzle.style.background = 'transparent';
-    puzzle.style.gap = '0';
+    puzzle.style.gap='0';
+    puzzle.style.background='transparent';
 
-    message.textContent =
+    message.textContent=
       `You solved it in ${moves} moves! 💕`;
 
     launchConfetti();
   }
-}
-    createPuzzle();
-    shufflePuzzle();
 
-  </script>
+}
+
+createPuzzle();
+shufflePuzzle();
+
+</script>
 
 </body>
 </html>
